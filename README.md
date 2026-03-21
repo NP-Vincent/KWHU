@@ -97,6 +97,18 @@ The MVP should stay `mostly onchain`.
 - Sensitive fulfillment details remain off-platform.
 - A dedicated backend is not required for the core flow.
 
+## Getting Started
+
+This repository currently documents the MVP scope and implementation direction.
+
+When app development begins:
+
+1. Copy `.env.example` to `.env`.
+2. Fill in the Base RPC and deployed contract addresses.
+3. Keep real secrets out of git and out of `.env.example`.
+
+Use `.env.example` as the only committed reference for local configuration shape.
+
 ## Intentional Constraints and Tradeoffs
 
 These choices are deliberate for the MVP:
