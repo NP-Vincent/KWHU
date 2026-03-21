@@ -40,7 +40,6 @@ contract KWHUToken is
         __ERC20_init(name_, symbol_);
         __Ownable_init(initialOwner);
         __Pausable_init();
-        __UUPSUpgradeable_init();
     }
 
     function mint(address to, uint256 amount) external whenNotPaused {
