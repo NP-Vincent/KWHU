@@ -85,6 +85,7 @@ The implementation is expected to use the Base app guidance already present in t
 - Frontend: `Next.js`
 - Wallet integration: `wagmi` + `viem`
 - Chain: `Base Mainnet`
+- Off-chain compatibility: `Supabase` (self-hosted in Docker)
 - Core contracts:
   - `KWHUToken`
   - `KWHUVault`
@@ -96,6 +97,8 @@ The MVP should stay `mostly onchain`.
 - Marketplace settlement and order status live onchain.
 - Sensitive fulfillment details remain off-platform.
 - A dedicated backend is not required for the core flow.
+- The repo includes a self-hosted Supabase bundle in [infra/supabase/README.md](./infra/supabase/README.md) for future off-chain data and storage needs.
+- The app remains `wallet-first`; Supabase Auth is not part of the current MVP app flow.
 
 ## Getting Started
 
