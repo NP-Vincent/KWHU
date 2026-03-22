@@ -1,0 +1,355 @@
+:root {
+  color-scheme: light;
+  --paper: #f5f1e8;
+  --paper-strong: #efe6d6;
+  --ink: #152020;
+  --ink-soft: #425454;
+  --line: rgba(21, 32, 32, 0.12);
+  --accent: #0f766e;
+  --accent-strong: #115e59;
+  --accent-soft: rgba(15, 118, 110, 0.14);
+  --sun: #f2b94b;
+  --card: rgba(255, 255, 255, 0.74);
+  --shadow: 0 24px 70px rgba(21, 32, 32, 0.12);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(242, 185, 75, 0.34), transparent 28%),
+    radial-gradient(circle at top right, rgba(15, 118, 110, 0.18), transparent 24%),
+    linear-gradient(180deg, #f8f4ec 0%, #f0e7d8 100%);
+  color: var(--ink);
+  font-family:
+    "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia,
+    serif;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.hero-panel,
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--card);
+  backdrop-filter: blur(22px);
+  box-shadow: var(--shadow);
+}
+
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(320px, 420px);
+  gap: 20px;
+  padding: 28px;
+}
+
+.hero-copy h1 {
+  margin: 10px 0 0;
+  max-width: 12ch;
+  font-size: clamp(2.7rem, 6vw, 5rem);
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero-text,
+.muted-text,
+.status-note {
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.hero-text {
+  max-width: 56ch;
+  margin: 18px 0 0;
+  font-size: 1.08rem;
+}
+
+.hero-grid,
+.info-grid,
+.content-grid,
+.flow-grid,
+.market-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.hero-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 26px;
+}
+
+.content-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 20px;
+}
+
+.content-grid.single-column {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.metric-card,
+.stat-tile,
+.flow-step {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(21, 32, 32, 0.08);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.metric-label,
+.field-label,
+.section-kicker,
+.stat-tile span,
+.flow-step span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.card {
+  padding: 24px;
+}
+
+.card h2,
+.card h3 {
+  margin: 0;
+}
+
+.card h2 {
+  font-size: 1.7rem;
+  line-height: 1.05;
+}
+
+.card-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.section-kicker {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.wallet-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.status-pill.warn {
+  background: rgba(242, 185, 75, 0.24);
+  color: #8f5c00;
+}
+
+.status-pill.muted {
+  background: rgba(21, 32, 32, 0.08);
+  color: var(--ink-soft);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button-primary,
+.button-secondary {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.button-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: white;
+  box-shadow: 0 14px 28px rgba(15, 118, 110, 0.22);
+}
+
+.button-secondary {
+  background: transparent;
+  border-color: rgba(21, 32, 32, 0.14);
+  color: var(--ink);
+}
+
+.button-primary:hover,
+.button-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary:disabled,
+.button-secondary:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
+}
+
+.address-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: rgba(21, 32, 32, 0.06);
+  font-family:
+    "SFMono-Regular", SFMono-Regular, ui-monospace, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.86rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.field,
+.field--full {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+.field input,
+.field select,
+.field textarea,
+.field--full input,
+.field--full select,
+.field--full textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid rgba(21, 32, 32, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--ink);
+}
+
+.field textarea,
+.field--full textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.flow-grid,
+.market-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.reference-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.reference-item {
+  padding: 16px 18px;
+  border: 1px solid rgba(21, 32, 32, 0.08);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.reference-item strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 980px) {
+  .hero-panel,
+  .content-grid,
+  .flow-grid,
+  .market-grid,
+  .hero-grid,
+  .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .page-shell {
+    width: min(100% - 22px, 1180px);
+    padding-top: 20px;
+  }
+
+  .hero-panel,
+  .card {
+    padding: 20px;
+  }
+
+  .hero-copy h1 {
+    max-width: 10ch;
+  }
+}

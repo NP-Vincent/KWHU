@@ -1,0 +1,10 @@
+.git
+.github
+.next
+cache
+coverage
+node_modules
+npm-debug.log
+tmp
+temp
+infra/supabase/volumes/db/data

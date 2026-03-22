@@ -39,6 +39,7 @@ build/
 coverage/
 broadcast/
 cache/
+*.tsbuildinfo
 
 # Misc
 .cache/

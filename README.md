@@ -113,6 +113,22 @@ When app development begins:
 
 Use `.env.example` as the only committed reference for local configuration shape.
 
+The repo now includes an initial Next.js app scaffold with:
+
+- `wagmi` + `viem` wallet and contract wiring
+- Base Mainnet as the default chain target
+- a wallet connection panel
+- a vault grant claim flow
+- a marketplace snapshot section
+- a first listing-creation form
+- and a simple health endpoint at `/api/health`
+
+To work with the app locally:
+
+1. Run `npm install` if you are using a local Node runtime, or use Docker with the included `Dockerfile`.
+2. Start the app with `npm run dev`, or use `docker compose up app` after creating `.env`.
+3. Open `http://localhost:3000`.
+
 ## Intentional Constraints and Tradeoffs
 
 These choices are deliberate for the MVP:
