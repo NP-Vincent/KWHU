@@ -85,6 +85,7 @@ The implementation is expected to use the Base app guidance already present in t
 - Frontend: `Next.js`
 - Wallet integration: `wagmi` + `viem`
 - Chain: `Base Mainnet`
+- Base developer reference: `https://docs.base.org/llms-full.txt`
 - Off-chain compatibility: `Supabase` (self-hosted in Docker)
 - Core contracts:
   - `KWHUToken`
@@ -145,5 +146,7 @@ That means the product should support:
 
 - Website: [kwhufoundation.com](https://kwhufoundation.com)
 - Detailed implementation plan: [PLAN.md](./PLAN.md)
+- Base static docs reference: [docs.base.org/llms-full.txt](https://docs.base.org/llms-full.txt)
+- Base MCP setup reference: [docs.base.org/get-started/docs-mcp](https://docs.base.org/get-started/docs-mcp)
 - Local implementation reference: [Base-app-get-started-guide.md](./Base-app-get-started-guide.md)
 - Local source material: [KWHU - KiloWatt-Hour equivalent Unit - V1.0.pdf](./KWHU%20-%20KiloWatt-Hour%20equivalent%20Unit%20-%20V1.0.pdf)

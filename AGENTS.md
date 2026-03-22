@@ -44,6 +44,7 @@ Unless the README changes, prefer:
 - `Next.js` for the app surface,
 - `wagmi` and `viem` for wallet and contract interaction,
 - `Base Mainnet` as the deployment target,
+- `https://docs.base.org/llms-full.txt` as the primary live Base documentation reference,
 - `mostly onchain` marketplace state,
 - and minimal backend requirements for the core product flow.
 
@@ -74,8 +75,9 @@ When repo materials disagree, use this order:
 1. `README.md` for the current agreed MVP scope
 2. `PLAN.md` for the detailed implementation plan
 3. `AGENTS.md` for contributor and implementation guardrails
-4. `Base-app-get-started-guide.md` for technical implementation patterns on Base
-5. KWHU Foundation website and PDF materials for broader product context and long-term intent
+4. `https://docs.base.org/llms-full.txt` for current Base documentation and developer guidance
+5. `Base-app-get-started-guide.md` for local technical implementation patterns on Base
+6. KWHU Foundation website and PDF materials for broader product context and long-term intent
 
 ## Documentation Expectations
 
