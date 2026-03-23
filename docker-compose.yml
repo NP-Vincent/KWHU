@@ -6,9 +6,47 @@ services:
     container_name: kwhu-app
     env_file:
       - .env
+    depends_on:
+      - metering-service
     ports:
       - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
       - /app/.next
+
+  mosquitto:
+    build:
+      context: ./infra/mosquitto
+    container_name: kwhu-mosquitto
+    env_file:
+      - .env
+    entrypoint:
+      - /bin/sh
+      - /mosquitto/config/entrypoint.sh
+    ports:
+      - "8883:8883"
+    volumes:
+      - ./infra/mosquitto/config:/mosquitto/config
+      - ./infra/mosquitto/runtime:/mosquitto/runtime
+      - kwhu-mosquitto-data:/mosquitto/data
+      - kwhu-mosquitto-log:/mosquitto/log
+
+  metering-service:
+    build:
+      context: ./services/metering
+    container_name: kwhu-metering-service
+    env_file:
+      - .env
+    depends_on:
+      - mosquitto
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - "4100:4100"
+    volumes:
+      - ./infra/mosquitto/runtime:/shared/mosquitto:ro
+
+volumes:
+  kwhu-mosquitto-data:
+  kwhu-mosquitto-log:

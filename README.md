@@ -14,6 +14,7 @@ This repository defines an MVP for a wallet-first KWHU marketplace on Base. The 
 - Restrict KWHU movement to `marketplace flows only`.
 - Price listings in `KWHU only`.
 - Support `goods and services`.
+- Support `metered renewable energy settlement`.
 - Use `escrow until fulfillment`.
 - Release escrow on `buyer confirmation`.
 - Route inactive or contested orders to `admin dispute review`.
@@ -40,6 +41,16 @@ The marketplace is the core venue for KWHU circulation and early price discovery
 - The marketplace supports both `goods` and `services`.
 - Physical delivery or service fulfillment details are handled `off-platform`.
 - The app records payment and status, while private fulfillment coordination stays outside the chain.
+
+### Metered Energy Settlement
+
+The MVP also supports prepaid electricity settlement between a buyer and a seller-owned renewable meter.
+
+- Meter readings do `not mint` new KWHU.
+- A buyer funds a prepaid energy agreement in KWHU.
+- Verified renewable readings release KWHU from escrow to the seller at `1 KWHU = 1 kWh`.
+- MQTT and Mosquitto provide the meter-ingestion layer.
+- A dedicated metering service stores raw payloads, normalized readings, and settlement attempts in Supabase.
 
 ### Token and Transfer Model
 
@@ -87,18 +98,23 @@ The implementation is expected to use the Base app guidance already present in t
 - Chain: `Base Mainnet`
 - Base developer reference: `https://docs.base.org/llms-full.txt`
 - Off-chain compatibility: `Supabase` (self-hosted in Docker)
+- Meter-ingestion layer: `Mosquitto` + `MQTT`
+- Meter settlement backend: `Node.js` + `TypeScript` + `mqtt` + `viem`
 - Core contracts:
   - `KWHUToken`
   - `KWHUVault`
   - `KWHUMarketplace`
+  - `KWHUEnergySettlement`
 
 The MVP should stay `mostly onchain`.
 
 - Core financial state lives onchain.
 - Marketplace settlement and order status live onchain.
+- Metered energy agreements and escrow settlement live onchain.
 - Sensitive fulfillment details remain off-platform.
-- A dedicated backend is not required for the core flow.
+- A dedicated metering backend is required for MQTT ingestion, broker credential provisioning, and settlement execution.
 - The repo includes a self-hosted Supabase bundle in [infra/supabase/README.md](./infra/supabase/README.md) for future off-chain data and storage needs.
+- The repo includes a dedicated Mosquitto runtime in [infra/mosquitto/README.md](./infra/mosquitto/README.md).
 - The app remains `wallet-first`; Supabase Auth is not part of the current MVP app flow.
 
 ## Getting Started
@@ -121,6 +137,9 @@ The repo now includes an initial Next.js app scaffold with:
 - a vault grant claim flow
 - a marketplace snapshot section
 - a first listing-creation form
+- meter registration and broker credential request flows
+- prepaid energy agreement creation and lookup flows
+- wallet-level reading and settlement history from Supabase
 - and a simple health endpoint at `/api/health`
 
 To work with the app locally:
@@ -128,6 +147,12 @@ To work with the app locally:
 1. Run `npm install` if you are using a local Node runtime, or use Docker with the included `Dockerfile`.
 2. Start the app with `npm run dev`, or use `docker compose up app` after creating `.env`.
 3. Open `http://localhost:3000`.
+
+For the metering runtime:
+
+1. Start the self-hosted Supabase stack from `infra/supabase/`.
+2. Use the repo root `docker-compose.yml` to run `app`, `mosquitto`, and `metering-service`.
+3. Request MQTT credentials from the app after a wallet has received KWHU credit.
 
 ## Intentional Constraints and Tradeoffs
 
@@ -140,10 +165,12 @@ These choices are deliberate for the MVP:
 - Do not add a marketplace exit flow in the MVP.
 - Do not require merchant approval before listing.
 - Do not require anti-sybil controls before claiming the signup grant.
+- Do not treat meter readings as a mint path for new KWHU supply.
 
 The MVP also intentionally allows a pilot-stage simplification:
 
 - KWHU issuance may happen before strict renewable-energy backing is enforced.
+- Meter registration is auto-approved and renewable qualification is self-attested for the pilot.
 
 This is a pilot tradeoff, not the long-term policy intent described by the KWHU Foundation materials.
 
@@ -165,4 +192,5 @@ That means the product should support:
 - Base static docs reference: [docs.base.org/llms-full.txt](https://docs.base.org/llms-full.txt)
 - Base MCP setup reference: [docs.base.org/get-started/docs-mcp](https://docs.base.org/get-started/docs-mcp)
 - Local implementation reference: [Base-app-get-started-guide.md](./Base-app-get-started-guide.md)
+- Local Mosquitto runtime reference: [infra/mosquitto/README.md](./infra/mosquitto/README.md)
 - Local source material: [KWHU - KiloWatt-Hour equivalent Unit - V1.0.pdf](./KWHU%20-%20KiloWatt-Hour%20equivalent%20Unit%20-%20V1.0.pdf)

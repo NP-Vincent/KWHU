@@ -8,3 +8,5 @@ npm-debug.log
 tmp
 temp
 infra/supabase/volumes/db/data
+infra/mosquitto/runtime
+services/metering/dist

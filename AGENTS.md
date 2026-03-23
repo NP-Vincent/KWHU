@@ -16,7 +16,8 @@ For this repository, the MVP is:
 - on `Base Mainnet`,
 - with a `foundation-operated vault`,
 - a `controlled ERC-20 KWHU`,
-- and a marketplace that supports `goods and services` through `escrowed KWHU payments`.
+- a marketplace that supports `goods and services` through `escrowed KWHU payments`,
+- and a separate `metered renewable energy settlement` flow using `MQTT + Mosquitto`.
 
 This repo is not currently centered on:
 
@@ -36,6 +37,8 @@ This repo is not currently centered on:
 - Treat fulfillment and delivery coordination as off-platform unless the README changes.
 - Assume open listing access: any wallet may list goods or services.
 - Assume open signup access: any new wallet may claim the one-time user credit grant.
+- Do not treat MQTT meter readings as a mint path for new KWHU.
+- Keep metered electricity settlement separate from the goods/services marketplace contract unless the README changes.
 
 ## Implementation Bias
 
@@ -45,6 +48,7 @@ Unless the README changes, prefer:
 - `wagmi` and `viem` for wallet and contract interaction,
 - `Base Mainnet` as the deployment target,
 - `https://docs.base.org/llms-full.txt` as the primary live Base documentation reference,
+- `Mosquitto` and `mqtt` for the metering ingress layer,
 - `mostly onchain` marketplace state,
 - and minimal backend requirements for the core product flow.
 
@@ -53,6 +57,7 @@ The current contract split should generally stay close to:
 - `KWHUToken` for controlled token behavior,
 - `KWHUVault` for user credit and grant controls,
 - `KWHUMarketplace` for listings, escrow, release, fees, and disputes.
+- `KWHUEnergySettlement` for prepaid buyer-seller meter agreements.
 
 ## Product Guardrails
 
@@ -64,6 +69,8 @@ The MVP currently assumes all of the following:
 - the allocation is non-repayable,
 - grant farming risk is accepted for the pilot,
 - completed releases deduct a `0.5%` marketplace fee,
+- metered electricity settlement has `no extra fee`,
+- meter registration is auto-approved for the pilot,
 - and there is no exit flow in the MVP.
 
 Do not quietly change those rules during implementation. If a change affects token policy, marketplace openness, redemption, transfers, pricing, or grant logic, update the README first.

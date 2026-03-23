@@ -114,7 +114,7 @@ button {
 }
 
 .hero-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 26px;
 }
 
@@ -329,11 +329,37 @@ button {
   margin-bottom: 6px;
 }
 
+.mono-block {
+  display: block;
+  overflow-wrap: anywhere;
+  font-family:
+    "SFMono-Regular", SFMono-Regular, ui-monospace, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.86rem;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.data-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+}
+
+.data-list-item {
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
 @media (max-width: 980px) {
   .hero-panel,
   .content-grid,
   .flow-grid,
   .market-grid,
+  .activity-grid,
   .hero-grid,
   .form-grid {
     grid-template-columns: minmax(0, 1fr);

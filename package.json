@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "metering:build": "npm --prefix services/metering run build",
+    "metering:dev": "npm --prefix services/metering run dev",
+    "metering:test": "npm --prefix services/metering run test"
   },
   "dependencies": {
     "@base-org/account": "latest",

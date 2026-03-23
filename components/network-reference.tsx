@@ -32,6 +32,14 @@ export function NetworkReference() {
             and storage needs rather than core authentication.
           </span>
         </div>
+        <div className="reference-item">
+          <strong>MQTT + Mosquitto</strong>
+          <span className="muted-text">
+            Metered renewable settlement uses a dedicated Mosquitto broker and a
+            separate Node.js metering service, while the Base app remains the
+            wallet and contract interface.
+          </span>
+        </div>
       </div>
     </section>
   )

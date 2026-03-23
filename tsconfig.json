@@ -38,6 +38,7 @@
   ],
   "exclude": [
     "infra/supabase",
+    "services/metering",
     "node_modules"
   ]
 }

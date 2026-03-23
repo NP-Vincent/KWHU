@@ -12,12 +12,17 @@ export const contractAddresses = {
   token: readAddress(process.env.NEXT_PUBLIC_KWHU_TOKEN_ADDRESS),
   vault: readAddress(process.env.NEXT_PUBLIC_KWHU_VAULT_ADDRESS),
   marketplace: readAddress(process.env.NEXT_PUBLIC_KWHU_MARKETPLACE_ADDRESS),
+  energySettlement: readAddress(process.env.NEXT_PUBLIC_KWHU_ENERGY_SETTLEMENT_ADDRESS),
 } as const
 
 export const hasConfiguredContracts = Boolean(
   contractAddresses.token &&
     contractAddresses.vault &&
     contractAddresses.marketplace,
+)
+
+export const hasConfiguredEnergyContract = Boolean(
+  contractAddresses.token && contractAddresses.energySettlement,
 )
 
 export const tokenAbi = [
@@ -124,5 +129,105 @@ export const marketplaceAbi = [
       { name: 'quantity', type: 'uint256' },
     ],
     outputs: [{ name: 'orderId', type: 'uint256' }],
+  },
+] as const
+
+export const energySettlementAbi = [
+  {
+    type: 'function',
+    name: 'nextAgreementId',
+    stateMutability: 'view',
+    inputs: [],
+    outputs: [{ name: '', type: 'uint256' }],
+  },
+  {
+    type: 'function',
+    name: 'getActiveAgreementId',
+    stateMutability: 'view',
+    inputs: [{ name: 'meterId', type: 'bytes32' }],
+    outputs: [{ name: '', type: 'uint256' }],
+  },
+  {
+    type: 'function',
+    name: 'getMeter',
+    stateMutability: 'view',
+    inputs: [{ name: 'meterId', type: 'bytes32' }],
+    outputs: [
+      {
+        name: '',
+        type: 'tuple',
+        components: [
+          { name: 'owner', type: 'address' },
+          { name: 'metadataURI', type: 'string' },
+          { name: 'sourceType', type: 'string' },
+          { name: 'active', type: 'bool' },
+          { name: 'createdAt', type: 'uint64' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'function',
+    name: 'getAgreement',
+    stateMutability: 'view',
+    inputs: [{ name: 'agreementId', type: 'uint256' }],
+    outputs: [
+      {
+        name: '',
+        type: 'tuple',
+        components: [
+          { name: 'meterId', type: 'bytes32' },
+          { name: 'buyer', type: 'address' },
+          { name: 'seller', type: 'address' },
+          { name: 'totalEscrow', type: 'uint256' },
+          { name: 'remainingEscrow', type: 'uint256' },
+          { name: 'settledEnergyWh', type: 'uint256' },
+          { name: 'settledAmount', type: 'uint256' },
+          { name: 'endTime', type: 'uint64' },
+          { name: 'createdAt', type: 'uint64' },
+          { name: 'lastSettledAt', type: 'uint64' },
+          { name: 'active', type: 'bool' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'function',
+    name: 'registerMeter',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'meterId', type: 'bytes32' },
+      { name: 'metadataURI', type: 'string' },
+      { name: 'sourceType', type: 'string' },
+    ],
+    outputs: [],
+  },
+  {
+    type: 'function',
+    name: 'createAgreement',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'meterId', type: 'bytes32' },
+      { name: 'escrowAmount', type: 'uint256' },
+      { name: 'endTime', type: 'uint64' },
+    ],
+    outputs: [{ name: 'agreementId', type: 'uint256' }],
+  },
+  {
+    type: 'function',
+    name: 'topUpAgreement',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'agreementId', type: 'uint256' },
+      { name: 'amount', type: 'uint256' },
+    ],
+    outputs: [],
+  },
+  {
+    type: 'function',
+    name: 'closeAgreement',
+    stateMutability: 'nonpayable',
+    inputs: [{ name: 'agreementId', type: 'uint256' }],
+    outputs: [],
   },
 ] as const
